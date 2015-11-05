@@ -1,14 +1,17 @@
 "use strict";
 
 // Globals
-var gainNode = null;
+var gainNode   = null;
 var oscillator = null;
-var max_amp = 1;
-var min_amp = 0;
+var loop_delay = 3*1000; //3 seconds delay
 
 
 $(document).ready(function(){
     start();
+    // Set interval to check every server every "loop_delay" seconds
+    setInterval(check_server, loop_delay);
+    // run once at the start
+    check_server();
 });
 
 function init(){
@@ -16,7 +19,7 @@ function init(){
     gainNode = context.createGain();
     oscillator = context.createOscillator();
 
-    set_freq(440);
+    set_freq(40);
     set_volume(0.1);
 
     oscillator.connect(gainNode);
@@ -36,12 +39,31 @@ function stop(){
 }
 
 function set_volume(amp){
-    // Ensure amplitude is between min_amp and max_amp
-    Math.max(Math.min(amp, max_amp), min_amp);
     // Set amplitude
-    gainNode.gain.value = amp;
+    if(gainNode)
+        gainNode.gain.value = amp;
 }
 
 function set_freq(freq){
-    oscillator.frequency.value = freq;
+    if(oscillator)
+        oscillator.frequency.value = freq;
 }
+
+function set_color(RGB_array){
+    // Round values down
+    var r = Math.floor(RGB_array[0]);
+    var g = Math.floor(RGB_array[1]);
+    var b = Math.floor(RGB_array[2]);
+    $('body').css('background-color', 'rgb('+r+','+g+','+b+')');
+}
+
+function check_server(){
+    var url = '/bouy.php';
+    $.get(url, function(data) {
+        console.log(data);
+        set_color(data.color);
+        set_volume(data.volume);
+        set_freq(data.frequency);
+    });
+}
+
