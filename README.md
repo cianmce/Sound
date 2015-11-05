@@ -1,8 +1,16 @@
+# Setup
 
-## Run simple Python or PHP server in this directory
+## Clone this repo
 
-`python -m SimpleHTTPServer 8000`
+`git clone https://github.com/cianmce/Sound.git`
 
-or
+
+## Run simple PHP server in this directory
 
 `php -S localhost:8000`
+
+## Open browser
+
+[http://localhost:8000](http://localhost:8000/)
+
+Full screen with '⌘-Shift-F' or 'f11'
