@@ -3,15 +3,15 @@
 // Globals
 var gainNode   = null;
 var oscillator = null;
-var loop_delay = 3*1000; //3 seconds delay
+var loop_delay = 10*1000; //10 seconds delay
 
 
 $(document).ready(function(){
     start();
     // Set interval to check every server every "loop_delay" seconds
-    setInterval(check_server, loop_delay);
+    setInterval(check_server_loop, loop_delay);
     // run once at the start
-    check_server();
+    check_server_loop();
 });
 
 function init(){
@@ -49,21 +49,32 @@ function set_freq(freq){
         oscillator.frequency.value = freq;
 }
 
-function set_color(RGB_array){
-    // Round values down
-    var r = Math.floor(RGB_array[0]);
-    var g = Math.floor(RGB_array[1]);
-    var b = Math.floor(RGB_array[2]);
-    $('body').css('background-color', 'rgb('+r+','+g+','+b+')');
+function componentToHex(c) {
+    var hex = Math.floor(c).toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-function check_server(){
-    var url = '/bouy.php';
+function set_color(hex_color){
+    $('body').css('background-color', hex_color);
+}
+
+function check_server_loop(){
+    current_buoy++;
+    current_buoy%=buoy_coords.length;
+    var url = '/buoy.php?buoy='+current_buoy;
+    console.log("url: "+url);
     $.get(url, function(data) {
         console.log(data);
-        set_color(data.color);
+        var hex_color = rgbToHex(data.color[0], data.color[1], data.color[2]);
+        set_color(hex_color);
+        update_map(hex_color, current_buoy);
         set_volume(data.volume);
         set_freq(data.frequency);
+    }).fail(function() {
+       check_server_loop();
     });
 }
 

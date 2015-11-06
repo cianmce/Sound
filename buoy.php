@@ -22,7 +22,7 @@ function strposX($haystack, $needle, $number){
  */
 function period_to_frequency($period){
     $freq = 1/$period;
-    $scale = 400.0;
+    $scale = 100.0;
     return $freq*$scale;    
 }
 
@@ -32,8 +32,8 @@ function period_to_frequency($period){
  * @return int
  */
 function height_to_volume($height){
-    $scale = 0.5;
-    return $height*$scale;    
+    $scale = 0.6;
+    return $height*$scale + 0.3;    
 }
 
 /**gainNode
@@ -42,33 +42,49 @@ function height_to_volume($height){
  * @return RGB array
  */
 function make_color($volume, $frequency){
-    $r = min(($frequency*1.5)*$volume, 255);
-    $g = min(($frequency*2.0)*$volume, 255);
-    $b = min(($frequency*3.0)*$volume, 255);
+    $r = min(($frequency*2.1)/$volume, 255);
+    $g = min(($frequency*2.1)+($volume*45), 255);
+    $b = min(($frequency*2.35)*$volume, 255);
     return array($r, $g, $b);    
 }
 
+$error_response  = array("error" => "no buoy data");
 
 // Get the web page
 $html = file_get_contents('http://www.met.ie/latest/buoy.asp');
 
+$buoy_index = 0;
+if(isset($_GET['buoy'])){
+    $buoy_index = $_GET['buoy'];
+}
+
 $search_for = '<td class="underliner12" align=center >';
 // Find the 9th time "$search_for" occurs
-$pos = strposX($html, $search_for, 9);
+$pos = strposX($html, $search_for, 9 + 11*$buoy_index);
 // Add on the lenght of "$search_for" get the position of its end
 $pos += strlen($search_for);
 // text is everything after "$search_for" e.g. text = "     0.4 </td"
 $text = substr($html, $pos, 15);
+if(strpos($text, 'n/a')!==false){
+    echo json_encode($error_response);
+    http_response_code(404);
+    exit();
+}
 // Get everythong before the "<"
 $period = trim(explode('<', $text)[0]);
 
 
 // Repeat for the 10th time
-$pos = strposX($html, $search_for, 10);
+$pos = strposX($html, $search_for, 10 + 11*$buoy_index);
 // Add on the lenght of "$search_for" get the position of its end
 $pos += strlen($search_for);
 // text is everything after "$search_for" e.g. text = "     0.4 </td"
 $text = substr($html, $pos, 15);
+if(strpos($text, 'n/a')!==false){
+    echo json_encode($error_response);
+    http_response_code(404);
+    exit();
+}
 // Get everythong before the "<"
 $height = trim(explode('<', $text)[0]);
 
