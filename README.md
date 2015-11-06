@@ -15,4 +15,4 @@
 
 Full screen with '⌘-Shift-F' or 'f11'
 
-#[Live Demo](http://ciancode.com/buoy)
+__[Live Demo](http://ciancode.com/buoy)__
