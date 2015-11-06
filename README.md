@@ -1,3 +1,5 @@
+## [Live Demo](http://ciancode.com/buoy)
+
 # Setup
 
 ## Clone this repo
@@ -15,4 +17,3 @@
 
 Full screen with '⌘-Shift-F' or 'f11'
 
-__[Live Demo](http://ciancode.com/buoy)__
