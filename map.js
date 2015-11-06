@@ -35,7 +35,7 @@ function initMap() {
         };
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     // Place 6 buoys
-    var image = '/img/buoy.png';
+    var image = 'img/buoy.png';
     for(var i=0; i<buoy_coords.length; i++){
       var beachMarker = new google.maps.Marker({
         position: new google.maps.LatLng(buoy_coords[i][0],buoy_coords[i][1]),

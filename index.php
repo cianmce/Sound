@@ -12,7 +12,7 @@
     <div class="absolute_center">
         <div id="map"></div>
     </div>
-    <img class="absolute_center" style="width:74px; height: 74px; padding-bottom:34px;" src="http://www.fontsaddict.com/images/icons/png/31463.png">
+    <img class="absolute_center" style="width:74px; height: 74px; padding-bottom:34px;" src="img/circle.png">
         <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="map.js"></script>

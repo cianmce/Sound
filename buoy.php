@@ -42,9 +42,9 @@ function height_to_volume($height){
  * @return RGB array
  */
 function make_color($volume, $frequency){
-    $r = min(($frequency*2.1)/$volume, 255);
-    $g = min(($frequency*2.1)+($volume*45), 255);
-    $b = min(($frequency*2.35)*$volume, 255);
+    $r = min(abs(sin($frequency))*255+$volume, 255);
+    $g = min(abs(cos($frequency))*255+$volume, 255);
+    $b = min(abs(sin(2*$frequency))*255+$volume, 255);
     return array($r, $g, $b);    
 }
 
@@ -66,8 +66,8 @@ $pos += strlen($search_for);
 // text is everything after "$search_for" e.g. text = "     0.4 </td"
 $text = substr($html, $pos, 15);
 if(strpos($text, 'n/a')!==false){
-    echo json_encode($error_response);
     http_response_code(404);
+    echo json_encode($error_response);
     exit();
 }
 // Get everythong before the "<"
@@ -81,8 +81,8 @@ $pos += strlen($search_for);
 // text is everything after "$search_for" e.g. text = "     0.4 </td"
 $text = substr($html, $pos, 15);
 if(strpos($text, 'n/a')!==false){
-    echo json_encode($error_response);
     http_response_code(404);
+    echo json_encode($error_response);
     exit();
 }
 // Get everythong before the "<"

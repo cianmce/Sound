@@ -64,7 +64,7 @@ function set_color(hex_color){
 function check_server_loop(){
     current_buoy++;
     current_buoy%=buoy_coords.length;
-    var url = '/buoy.php?buoy='+current_buoy;
+    var url = 'buoy.php?buoy='+current_buoy;
     console.log("url: "+url);
     $.get(url, function(data) {
         console.log(data);
