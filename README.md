@@ -2,7 +2,7 @@
 
 ## Clone this repo
 
-`git clone https://github.com/cianmce/Sound.git`
+`git clone https://github.com/cianmce/Wavez.git`
 
 
 ## Run simple PHP server in this directory
