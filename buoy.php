@@ -22,7 +22,7 @@ function strposX($haystack, $needle, $number){
  */
 function period_to_frequency($period){
     $freq = 1/$period;
-    $scale = 100.0;
+    $scale = 20.0;
     return $freq*$scale;    
 }
 
@@ -32,19 +32,19 @@ function period_to_frequency($period){
  * @return int
  */
 function height_to_volume($height){
-    $scale = 0.6;
+    $scale = 8.0;
     return $height*$scale + 0.3;    
 }
 
-/**gainNode
+/**
  * Converts wave volume & frequency to requency
  * @param $period
  * @return RGB array
  */
 function make_color($volume, $frequency){
-    $r = min(abs(sin($frequency))*255+$volume, 255);
-    $g = min(abs(cos($frequency))*255+$volume, 255);
-    $b = min(abs(sin(2*$frequency))*255+$volume, 255);
+    $r = min(abs(sin($frequency))*255, 255);
+    $g = min(abs(cos($frequency))*255, 255);
+    $b = min(abs(sin(2*$frequency))*255, 255);
     return array($r, $g, $b);    
 }
 

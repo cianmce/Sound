@@ -20,7 +20,6 @@
         
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeSD0lj_reeexEp0zcbnrexKA0trMXJ-c&signed_in=true&callback=initMap"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiyxI7BGNBzEPVHN_G47Yb4-xwLj3JvJo&callback=initMap" async defer></script>
   </body>
 </html>

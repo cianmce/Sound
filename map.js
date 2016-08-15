@@ -31,8 +31,11 @@ function initMap() {
           zoom: 7,
           center: new google.maps.LatLng(buoy_coords[0][0], buoy_coords[0][1]),
           disableDefaultUI: true,
-          styles: styles
+          styles: styles,
+          // disable controlling
+          draggable: false, zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true
         };
+
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
     // Place 6 buoys
     var image = 'img/buoy.png';

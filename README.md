@@ -1,5 +1,3 @@
-## [Live Demo](http://ciancode.com/buoy)
-
 # Setup
 
 ## Clone this repo
@@ -16,4 +14,3 @@
 [http://localhost:8000](http://localhost:8000/)
 
 Full screen with '⌘-Shift-F' or 'f11'
-
