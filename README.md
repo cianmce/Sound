@@ -1,3 +1,6 @@
+# [Live Demo](http://ciancode.com/buoy/)
+
+
 # Setup
 
 ## Clone this repo
